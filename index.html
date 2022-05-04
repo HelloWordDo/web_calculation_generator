@@ -385,11 +385,19 @@ function print_issue(issue, show_answer)
 function create_table(p)
 {
     var tab;
-
-    tab = document.createElement("table");
-    tab.innerHTML = '<table class="table"></table>' ;
-    tab.setAttribute("id", "mytab" + p);
-    for (var r=0; r < 11; r++) {
+    
+    if(CELLS_PER_PAGE == 50 ) {
+      tab = document.createElement("table");
+      tab.innerHTML = '<table class="table"></table>' ;
+      tab.setAttribute("id", "mytab" + p);
+      row = 11
+    } else if(CELLS_PER_PAGE == 100 ) {
+      tab = document.createElement("table");
+      tab.innerHTML = '<table class="table"></table>' ;
+      tab.setAttribute("id", "mytab_100_" + p);
+      row = 21
+    }
+    for (var r=0; r < row; r++) {
         tr = tab.insertRow(r);
         if (r == 0) { 
             tr.innerHTML = '<tr> <td></td> \
@@ -410,7 +418,7 @@ function create_table(p)
     return tab;
 }
 
-function show_issues() 
+function show_issues(count) 
 {
     var p, r, c;
     var tab, tr, td;
@@ -418,24 +426,61 @@ function show_issues()
     var show_answer = document.getElementById("show_answer_cb").checked;
 
     for (p = 0; p < total_pages; p++) {
-        tab = document.getElementById("mytab" + p);
-        if (!tab) {
-            tab = create_table(p);
-        }
 
-        for (r = 0; r < 10; r ++) {
+        var d = document.getElementById("tabdiv");
+        if (CELLS_PER_PAGE == 50) {
+
+          tab = document.getElementById("mytab" + p);
+
+          if (!tab) {
+            tab = create_table(p);
+          }
+          tab_100 = document.getElementById("mytab_100_" + p);
+          if (tab_100) {
+            d.removeChild(tab_100);
+            delete tab_100;
+          }
+
+          for (r = 0; r < 10; r ++) {
             tr = tab.rows[r + 1];
             for (c = 0; c < 5; c ++) {
                 td = tr.cells[c];
                 td.innerHTML = print_issue(cells[p*CELLS_PER_PAGE + c*10 + r], show_answer);
             }
+          }
+        } else if (CELLS_PER_PAGE == 100) {
+
+          tab = document.getElementById("mytab_100_" + p);
+          if (!tab) {
+            tab = create_table(p);
+          }
+
+          tab_50 = document.getElementById("mytab" + p);
+          if (tab_50) {
+            d.removeChild(tab_50);
+            delete tab_50;
+          }
+
+          for (r = 0; r < 20; r ++) {
+            tr = tab.rows[r + 1];
+
+            for (c = 0; c < 5; c ++) {
+                td = tr.cells[c];
+                td.innerHTML = print_issue(cells[p*CELLS_PER_PAGE + c*20 + r], show_answer);
+            }
+          }
         }
     }
 
     if (old_total_pages > total_pages) {
         var d = document.getElementById("tabdiv");
         for (p = old_total_pages - 1; p >= total_pages; p --) {
+          if (CELLS_PER_PAGE == 50) {
             tab = document.getElementById("mytab" + p);
+          } else if (CELLS_PER_PAGE == 100) {
+            tab = document.getElementById("mytab_100_" + p);
+          }
+
             if (tab) { 
                 d.removeChild(tab);
                 delete tab;
@@ -445,7 +490,7 @@ function show_issues()
     old_total_pages = total_pages;
 }
 
-function generate_mode1()
+function generate_mode1(count)
 {
     var cols = ["col1type", "col2type", "col3type", "col4type", "col5type"];
     var mode, issues, i, j;
@@ -453,24 +498,36 @@ function generate_mode1()
     for (var p = 0; p < total_pages; p++) {
         for (i = 0; i < 5; i ++ ) {
             mode = document.getElementById(cols[i]).value;
-            issues = generate_issues(mode, 10);
+           
+            if(count == 50) {
 
-            for (j = 0; j < 10; j++) {
+              issues = generate_issues(mode, 10);
+              CELLS_PER_PAGE = 50;
+              // cells = new Array(MAX_PAGES * CELLS_PER_PAGE);
+              for (j = 0; j < 10; j++) {
                 cells[p*CELLS_PER_PAGE + i*10 + j] = issues[j];
+              }
+            } else if(count == 100) {
+
+              issues = generate_issues(mode, 20);
+              CELLS_PER_PAGE = 100;
+              // cells = new Array(MAX_PAGES * CELLS_PER_PAGE);
+              for (j = 0; j < 20; j++) {
+                cells[p*CELLS_PER_PAGE + i*20 + j] = issues[j];
+              }
             }
+           
         }
     }
-
-    show_issues();
+    show_issues(count);
 }
 
-function generate_mode2()
+function generate_mode2(count)
 {
     var i, j, k, p;
     var mode;
     var input;
     var issues;
-    var current_cells = new Array(CELLS_PER_PAGE);
 
     var n = new Array(modes.length);
     var total = 0;
@@ -484,10 +541,17 @@ function generate_mode2()
         total += n[i];
     }
 
-    if (total != 50) {
-        alert("总题数应该是50，现在是" + total);
+    if (total != 50 && total != 100) {
+        alert("总题数应该是50或100，现在是" + total);
         return;
     }
+
+    if (total == 50) {
+      CELLS_PER_PAGE = 50;
+    } else if (count == 100){
+      CELLS_PER_PAGE = 100;
+    }
+    var current_cells = new Array(CELLS_PER_PAGE);
 
     for (p = 0; p < total_pages; p++ ) {
         k = 0;
@@ -508,10 +572,10 @@ function generate_mode2()
             cells[p * CELLS_PER_PAGE + i] = current_cells[i];
     }
 
-    show_issues();
+    show_issues(CELLS_PER_PAGE);
 }
 
-function generate()
+function generate(count)
 {
     var pages = document.getElementById("pages").value;
 
@@ -524,9 +588,9 @@ function generate()
     total_pages = pages;
 
     if (current_mode == 0) 
-        generate_mode1();
+        generate_mode1(count);
     else
-        generate_mode2();
+        generate_mode2(count);
 
 }
 
@@ -543,12 +607,28 @@ function tab(){
     for (i=0;i<tabs.length;i++){
         tabs[i].className="";
         cts[i].className="";
+        
         if (tabs[i]==this){
-            tabs[i].className="tab";
-            cts[i].className="ct";
-            current_mode = i;
+
+          var word = tabs[i].innerHTML;
+          if(word === '按列选模式生成'){
+
+            document.getElementById("btn50").style.display="inline";
+            document.getElementById("btn100").style.display="inline";
+            document.getElementById("btnmix").style.display="none";
+          } else if (word === '按模式数量混合生成') {
+
+            document.getElementById("btn50").style.display="none";
+            document.getElementById("btn100").style.display="none";
+            document.getElementById("btnmix").style.display="inline";
+          }
+          tabs[i].className="tab";
+          cts[i].className="ct";
+          current_mode = i;
         }
     }
+
+    
 }
 
 /* fill in the mode lists */
@@ -577,7 +657,10 @@ function create_options()
 window.onload=function (){
     changetab();
     create_options();
-    generate();
+    generate(50);
+    document.getElementById("btn50").style.display="inline";
+    document.getElementById("btn100").style.display="inline";
+    document.getElementById("btnmix").style.display="none";
 }
 
 function printme()
@@ -633,13 +716,15 @@ function saveaspdf()
     </div>
     <div id="act" align="center">
         <div class="act" align="center">
-        <input type="button" value="重新生成" onclick="generate()" />
-    <input type="text" value="1" id="pages" size="2"/>份
+        <input id="btn50" type="button" value="重新生成50题" onclick="generate(50)" />
+        <input id="btn100" type="button" value="重新生成100题" onclick="generate(100)" />
+        <input id="btnmix" type="button" value="重新生成" onclick="generate(100)" />
+        <input type="text" value="1" id="pages" size="2"/>份
         <input type="button" value="打印习题" onclick="printme()" />
         <input type="button" value="另存为word" onclick="saveasword()" />
-<!---
-        <input type="button" value="另存为pdf" onclick="saveaspdf()" />
----!>
+
+        <!-- <input type="button" value="另存为pdf" onclick="saveaspdf()" /> -->
+
         <input type="checkbox" id="show_answer_cb" value="answer" onclick="show_issues()"/>显示答案
         </div>
     </div>
