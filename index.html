@@ -446,8 +446,10 @@ function show_issues(count)
             for (c = 0; c < 5; c ++) {
                 td = tr.cells[c];
                 td.innerHTML = print_issue(cells[p*CELLS_PER_PAGE + c*10 + r], show_answer);
+                td.style.height = "80px";
             }
           }
+          
         } else if (CELLS_PER_PAGE == 100) {
 
           tab = document.getElementById("mytab_100_" + p);
@@ -467,6 +469,7 @@ function show_issues(count)
             for (c = 0; c < 5; c ++) {
                 td = tr.cells[c];
                 td.innerHTML = print_issue(cells[p*CELLS_PER_PAGE + c*20 + r], show_answer);
+                td.style.height = "40px";
             }
           }
         }
