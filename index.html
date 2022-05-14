@@ -9,10 +9,10 @@
        h2 span { width:374px;height:50px;line-height:50px;text-align:center;float:left;}
 
        ul li.colmode { float:left; width:200px; font-size:14px; margin:0 0; padding: 0; height: 20px; list-style-type: none;}
-       ul li { float:left; width:150px; font-size:14px; margin:0 0; padding: 0; height: 20px; list-style-type: none;}
+       ul li { float:left; width:165px; font-size:14px; margin:0 0; padding: 0; height: 20px; list-style-type: none;}
 
        #tab .tab { color:yellow;background-color:#999;}
-       #ct div { width:750px;height:120px;margin:0 0;border:1px solid blue;display:none;}
+       #ct div { width:750px;height:160px;margin:0 0;border:1px solid blue;display:none;}
        #ct .ct { display:block; float:center;}
        #act div { width:750px;height:30px;margin:0 0;border:1px solid blue;display:none;}
        #act .act { display:block; float:center;}
@@ -68,6 +68,10 @@ var modes = [
              ["add_1_2", "一位数加两位数"],
              ["add_2_1", "两位数加一位数"],
              ["sub_2_1", "两位数减一位数"],
+             ["addc_2_2_100", "两位数加法=100"],
+             ["add_2_1_100", "两位数加一位数=100"],
+             ["sub_100_1", "100减一位数"],
+             ["sub_100_2", "100减两位数"],
              ["mul_1_1", "一位数乘一位数"],
              ["addmul_2_1_1", "两位数加一位数乘"],
              ["muladd_1_1_2", "一位数乘加两位数"],
@@ -192,7 +196,7 @@ function generate_issue(type)
             j = rand(0,9);
             issue.opr[0] = i * 10 + j;
             issue.op[0] = '+';
-            issue.opr[1] = (i < 9) ? rand(0,9) : rand(0, 9 - j);
+            issue.opr[1] = (i < 9) ? rand(1,9) : rand(1, 9 - j);
             issue.result = issue.opr[0] + issue.opr[1];
             break;
         case 'add_1_2': 
@@ -209,6 +213,36 @@ function generate_issue(type)
             issue.opr[0] = i*10 + j;
             issue.op[0] = '-';
             issue.opr[1] = rand(0,9);
+            issue.result = issue.opr[0] - issue.opr[1];
+            break;
+        case 'add_2_1_100': 
+            i = rand(1,9);
+            j = rand(0,9);
+            issue.opr[1] = rand(1,9);
+            issue.op[0] = '+';
+            issue.opr[0] = 100 - issue.opr[1];
+            issue.result = issue.opr[0] + issue.opr[1];
+            break;
+        case 'addc_2_2_100': 
+            i = rand(1,7);
+            j = rand(1,9);
+            issue.opr[0] = i * 10 + j;
+            issue.op[0] = '+';
+            issue.opr[1] = 100 - issue.opr[0];
+            issue.result = issue.opr[0] + issue.opr[1];
+            break;
+        case 'sub_100_1': 
+            issue.opr[0] = 100;
+            issue.op[0] = '-';
+            issue.opr[1] = rand(1,9);
+            issue.result = issue.opr[0] - issue.opr[1];
+            break;
+        case 'sub_100_2': 
+            i = rand(1,9);
+            j = rand(0,9);
+            issue.opr[0] = 100;
+            issue.op[0] = '-';
+            issue.opr[1] = i*10 + j;
             issue.result = issue.opr[0] - issue.opr[1];
             break;
         case 'mul_1_1': 
