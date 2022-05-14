@@ -188,7 +188,11 @@ function generate_issue(type)
             j = rand(0,9);
             issue.opr[0] = i * 10 + j;
             issue.op[0] = '-';
-            issue.opr[1] = rand(1,i) * 10 + rand(0,j);
+            sub = rand(1,i) * 10 + rand(0,j);
+            while(issue.opr[0] == sub){
+              sub = rand(1,i) * 10 + rand(0,j);
+            }
+            issue.opr[1] = sub;
             issue.result = issue.opr[0] - issue.opr[1];
             break;
         case 'add_2_1': 
@@ -212,7 +216,7 @@ function generate_issue(type)
             j = rand(0,9);
             issue.opr[0] = i*10 + j;
             issue.op[0] = '-';
-            issue.opr[1] = rand(0,9);
+            issue.opr[1] = rand(1,9);
             issue.result = issue.opr[0] - issue.opr[1];
             break;
         case 'add_2_1_100': 
