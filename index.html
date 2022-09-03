@@ -354,6 +354,9 @@
 
             p = rand(1, i - m - 1);
             q = rand(0, 9);
+            if (i - m - 1 <= 0) {
+              q = rand(6, 9);
+            }
             issue.opr[2] = p * 10 + q;
 
             issue.result = issue.opr[0] - issue.opr[1] - issue.opr[2];
