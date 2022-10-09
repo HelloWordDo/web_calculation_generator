@@ -139,7 +139,7 @@ function show_issues(count) {
         for (c = 0; c < 5; c++) {
           td = tr.cells[c];
           td.innerHTML = print_issue(cells[p * CELLS_PER_PAGE + c * 10 + r], show_answer);
-          td.style.height = "80px";
+          td.style.height = "97px";
         }
       }
 
@@ -162,7 +162,7 @@ function show_issues(count) {
         for (c = 0; c < 5; c++) {
           td = tr.cells[c];
           td.innerHTML = print_issue(cells[p * CELLS_PER_PAGE + c * 20 + r], show_answer);
-          td.style.height = "33px";
+          td.style.height = "45.5px";
         }
       }
     }
@@ -204,9 +204,9 @@ function create_table(p) {
     tr = tab.insertRow(r);
     if (r == 0) {
       tr.innerHTML = '<tr> <td></td> \
-                       <td colspan="1" align="center">姓名：</td> \
                        <td colspan="1" align="center">班级：</td> \
-                       <td colspan="1" align="center">时间：</td> \
+                       <td colspan="1" align="center">姓名：</td> \
+                       <td colspan="1" align="center">学号：</td> \
                        <td></td> </tr>';
     } else {
       for (var c = 0; c < 5; c++) {

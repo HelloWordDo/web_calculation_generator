@@ -50,7 +50,7 @@ function create_options() {
   for (i = 0; i < modes.length; i++) {
     li = document.createElement("li");
     li.innerHTML = '<li class="mixmode">' + modes[i][1] + '<input id="' +
-      modes[i][0] + '" type="text" value="0" size="2"/> </li>';
+      modes[i][0] + '" type="text" value="0" size="3"/> </li>';
     list.appendChild(li);
   }
 }

@@ -3,6 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="css/index.css">
+  <title>小学生口算生成器</title>
 </head>
 
 <body>
@@ -26,6 +27,7 @@
   <script type="text/javascript" src="js/calculate/integerAdd.js"></script>
   <script type="text/javascript" src="js/calculate/integerSub.js"></script>
   <script type="text/javascript" src="js/calculate/integerMul.js"></script>
+  <script type="text/javascript" src="js/calculate/integerDiv.js"></script>
   <script type="text/javascript" src="js/calculate/integerMix.js"></script>
 
   <script type="text/javascript">
@@ -117,6 +119,10 @@
 
         case 'mul_1_1':
           issue = mul_1_1(issue);
+          break;
+
+        case 'div_9_9':
+          issue = div_9_9(issue);
           break;
 
         case 'addmul_2_1_1':
