@@ -59,11 +59,11 @@ function add_1_2(issue) {
 function add_2_1(issue) {
 
   var i, j;
-  i = rand(1, 9);
+  i = rand(1, 8);
   j = rand(0, 9);
   issue.opr[0] = i * 10 + j;
   issue.op[0] = '+';
-  issue.opr[1] = (i < 9) ? rand(1, 9) : rand(1, 9 - j);
+  issue.opr[1] = (i < 9) ? rand(4, 9) : rand(2, 9 - j);
   issue.result = issue.opr[0] + issue.opr[1];
 
   return issue;

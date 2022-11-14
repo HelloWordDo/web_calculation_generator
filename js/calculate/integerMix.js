@@ -79,7 +79,7 @@ function addmul_2_1_1(issue) {
   issue.opr[0] = i;
   issue.op[0] = '+';
   issue.opr[1] = j;
-  issue.op[1] = 'x';
+  issue.op[1] = '×';
   issue.opr[2] = k;
   issue.result = issue.opr[0] + issue.opr[1] * issue.opr[2];
 
@@ -96,7 +96,7 @@ function submul_2_1_1(issue) {
   issue.opr[0] = i;
   issue.op[0] = '-';
   issue.opr[1] = j;
-  issue.op[1] = 'x';
+  issue.op[1] = '×';
   issue.opr[2] = k;
   issue.result = issue.opr[0] - issue.opr[1] * issue.opr[2];
 
@@ -111,7 +111,7 @@ function muladd_1_1_2(issue) {
   k = rand(1, 99);
   issue.op_n = 2;
   issue.opr[0] = i;
-  issue.op[0] = 'x';
+  issue.op[0] = '×';
   issue.opr[1] = j;
   issue.op[1] = '+';
   issue.opr[2] = k;
@@ -128,7 +128,7 @@ function mulsub_1_1_2(issue) {
   k = rand(1, i * j);
   issue.op_n = 2;
   issue.opr[0] = i;
-  issue.op[0] = 'x';
+  issue.op[0] = '×';
   issue.opr[1] = j;
   issue.op[1] = '-';
   issue.opr[2] = k;

@@ -30,14 +30,14 @@ function subc_2_2(issue) {
 function sub_2_2(issue) {
 
   var i, j;
-  i = rand(1, 9);
-  j = rand(0, 9);
+  i = rand(2, 9);
+  j = rand(1, 9);
   issue.opr[0] = i * 10 + j;
   issue.op[0] = '-';
-  sub = rand(1, i) * 10 + rand(0, j);
-  while (issue.opr[0] == sub) {
-    sub = rand(1, i) * 10 + rand(0, j);
-  }
+  do {
+    sub = rand(1, i) * 10 + rand(0, j)
+  } while (issue.opr[0] == sub || issue.opr[0] - sub < 4)
+
   issue.opr[1] = sub;
   issue.result = issue.opr[0] - issue.opr[1];
   return issue;
@@ -51,7 +51,7 @@ function sub_2_1(issue) {
   j = rand(0, 9);
   issue.opr[0] = i * 10 + j;
   issue.op[0] = '-';
-  issue.opr[1] = rand(1, 9);
+  issue.opr[1] = rand(4, 9);
   issue.result = issue.opr[0] - issue.opr[1];
 
   return issue;
@@ -62,7 +62,7 @@ function sub_100_1(issue) {
 
   issue.opr[0] = 100;
   issue.op[0] = '-';
-  issue.opr[1] = rand(1, 9);
+  issue.opr[1] = rand(4, 9);
   issue.result = issue.opr[0] - issue.opr[1];
 
   return issue;
