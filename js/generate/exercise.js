@@ -1,4 +1,4 @@
-function generate(count) {
+function generate (count) {
   var pages = document.getElementById("pages").value;
 
   if (isNaN(pages) || pages < 1 || pages > MAX_PAGES) {
@@ -16,7 +16,7 @@ function generate(count) {
 
 }
 
-function generate_mode1(count) {
+function generate_mode1 (count) {
   var cols = ["col1type", "col2type", "col3type", "col4type", "col5type"];
   var mode, issues, i, j;
 
@@ -47,7 +47,7 @@ function generate_mode1(count) {
   show_issues(count);
 }
 
-function generate_mode2(count) {
+function generate_mode2 (count) {
   var i, j, k, p;
   var mode;
   var input;
@@ -102,7 +102,7 @@ function generate_mode2(count) {
 
 
 /* genrate n issues of given type */
-function generate_issues(type, n) {
+function generate_issues (type, n) {
   var issues = new Array(n);
 
   for (var i = 0; i < n; i++)
@@ -112,7 +112,7 @@ function generate_issues(type, n) {
 }
 
 
-function show_issues(count) {
+function show_issues (count) {
   var p, r, c;
   var tab, tr, td;
 
@@ -186,7 +186,7 @@ function show_issues(count) {
   old_total_pages = total_pages;
 }
 
-function create_table(p) {
+function create_table (p) {
   var tab;
 
   if (CELLS_PER_PAGE == 50) {
@@ -221,7 +221,7 @@ function create_table(p) {
   return tab;
 }
 
-function print_issue(issue, show_answer) {
+function print_issue (issue, show_answer) {
   var s = '<td> ';
   s += issue.opr[0];
   s += issue.op[0];
