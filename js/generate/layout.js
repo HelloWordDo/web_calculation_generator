@@ -17,11 +17,13 @@ function tab() {
       var word = tabs[i].innerHTML;
       if (word === '按列选模式生成') {
 
+        document.getElementById("btn25").style.display = "inline";
         document.getElementById("btn50").style.display = "inline";
         document.getElementById("btn100").style.display = "inline";
         document.getElementById("btnmix").style.display = "none";
       } else if (word === '按模式数量混合生成') {
 
+        document.getElementById("btn25").style.display = "none";
         document.getElementById("btn50").style.display = "none";
         document.getElementById("btn100").style.display = "none";
         document.getElementById("btnmix").style.display = "inline";

@@ -19,13 +19,11 @@ var calculateModes = [
   ["sub_add_cont_100", "先减后加<100 "],
   ["mul_1_1", "一位数乘一位数 "],
   ["div_9_9", "9*9内除法 "],
-  ["addmul_2_1_1", "两位数加一位数乘 "],
-  ["muladd_1_1_2", "一位数乘加两位数 "],
-  ["mulsub_1_1_2", "一位数乘减两位数 "],
-  ["submul_2_1_1", "两位数减一位数乘 "],
-  ["sub9", "减数个位=9 "],
-  ["sub012", "减数个位=012 "],
-  ["add012", "加数个位=012 "],
-  ["addn_2_2", "特殊非进位加 "],
-  ["remainder_max_88", "88以内带余数除法"]
+  ["addmul_2_1_1", "2位数加1位数乘 "],
+  ["muladd_1_1_2", "2位数乘加2位数 "],
+  ["mulsub_1_1_2", "1位数乘减2位数 "],
+  ["submul_2_1_1", "2位数减1位数乘 "],
+  ["remainder_max_88", "88以内÷带余数"],
+  ["threeFigures_div_oneFingures", "3位÷1位"],
+  ["threeFigures_div_oneFingures_remainder", "3位÷1位带余"]
 ]

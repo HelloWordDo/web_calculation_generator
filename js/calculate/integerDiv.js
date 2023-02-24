@@ -23,6 +23,37 @@ function remainder_max_88 (issue) {
 
   issue.result = i + '······' + m;
 
+  return issue
+}
+
+//三位数整除一位数
+function threeFigures_div_oneFingures (issue) {
+
+  i = rand(100, 999);
+  j = rand(2, 9);
+
+  var temp = parseInt(i / j);
+  issue.opr[0] = temp * j;
+  issue.op[0] = '÷';
+  issue.opr[1] = j;
+  issue.result = temp;
+
+  return issue
+}
+
+//三位数不整除一位数
+function threeFigures_div_oneFingures_remainder (issue) {
+
+  i = rand(100, 999);
+  j = rand(2, 9);
+
+  var temp = parseInt(i / j);
+  m = rand(1, j - 1);
+
+  issue.opr[0] = temp * j + m;
+  issue.op[0] = '÷';
+  issue.opr[1] = j;
+  issue.result = temp + '······' + m;
 
   return issue
 }

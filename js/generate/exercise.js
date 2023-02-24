@@ -16,6 +16,7 @@ function generate (count) {
 
 }
 
+//按列模式
 function generate_mode1 (count) {
   var cols = ["col1type", "col2type", "col3type", "col4type", "col5type"];
   var mode, issues, i, j;
@@ -24,7 +25,15 @@ function generate_mode1 (count) {
     for (i = 0; i < 5; i++) {
       mode = document.getElementById(cols[i]).value;
 
-      if (count == 50) {
+      if (count == 25) {
+
+        issues = generate_issues(mode, 5);
+        CELLS_PER_PAGE = 25;
+        // cells = new Array(MAX_PAGES * CELLS_PER_PAGE);
+        for (j = 0; j < 5; j++) {
+          cells[p * CELLS_PER_PAGE + i * 5 + j] = issues[j];
+        }
+      } else if (count == 50) {
 
         issues = generate_issues(mode, 10);
         CELLS_PER_PAGE = 50;
@@ -65,16 +74,13 @@ function generate_mode2 (count) {
     total += n[i];
   }
 
-  if (total != 50 && total != 100) {
-    alert("总题数应该是50或100，现在是" + total);
+  if (total != 25 && total != 50 && total != 100) {
+    alert("总题数应该是25、50或100，现在是" + total);
     return;
   }
 
-  if (total == 50) {
-    CELLS_PER_PAGE = 50;
-  } else if (count == 100) {
-    CELLS_PER_PAGE = 100;
-  }
+  CELLS_PER_PAGE = total;
+
   var current_cells = new Array(CELLS_PER_PAGE);
 
   for (p = 0; p < total_pages; p++) {
@@ -121,17 +127,32 @@ function show_issues (count) {
   for (p = 0; p < total_pages; p++) {
 
     var d = document.getElementById("tabdiv");
-    if (CELLS_PER_PAGE == 50) {
 
-      tab = document.getElementById("mytab" + p);
+    removeElement(p)
+
+    if (CELLS_PER_PAGE == 25) {
+
+      tab = document.getElementById("mytab_25_" + p);
 
       if (!tab) {
         tab = create_table(p);
       }
-      tab_100 = document.getElementById("mytab_100_" + p);
-      if (tab_100) {
-        d.removeChild(tab_100);
-        delete tab_100;
+
+      for (r = 0; r < 5; r++) {
+        tr = tab.rows[r + 1];
+        for (c = 0; c < 5; c++) {
+          td = tr.cells[c];
+          td.innerHTML = print_issue(cells[p * CELLS_PER_PAGE + c * 5 + r], show_answer);
+          td.style.height = "180px";
+        }
+      }
+
+    } else if (CELLS_PER_PAGE == 50) {
+
+      tab = document.getElementById("mytab_50_" + p);
+
+      if (!tab) {
+        tab = create_table(p);
       }
 
       for (r = 0; r < 10; r++) {
@@ -139,7 +160,7 @@ function show_issues (count) {
         for (c = 0; c < 5; c++) {
           td = tr.cells[c];
           td.innerHTML = print_issue(cells[p * CELLS_PER_PAGE + c * 10 + r], show_answer);
-          td.style.height = "97px";
+          td.style.height = "94px";
         }
       }
 
@@ -150,49 +171,56 @@ function show_issues (count) {
         tab = create_table(p);
       }
 
-      tab_50 = document.getElementById("mytab" + p);
-      if (tab_50) {
-        d.removeChild(tab_50);
-        delete tab_50;
-      }
-
       for (r = 0; r < 20; r++) {
         tr = tab.rows[r + 1];
 
         for (c = 0; c < 5; c++) {
           td = tr.cells[c];
           td.innerHTML = print_issue(cells[p * CELLS_PER_PAGE + c * 20 + r], show_answer);
-          td.style.height = "45.5px";
+          td.style.height = "44px";
         }
       }
     }
   }
 
   if (old_total_pages > total_pages) {
-    var d = document.getElementById("tabdiv");
-    for (p = old_total_pages - 1; p >= total_pages; p--) {
-      if (CELLS_PER_PAGE == 50) {
-        tab = document.getElementById("mytab" + p);
-      } else if (CELLS_PER_PAGE == 100) {
-        tab = document.getElementById("mytab_100_" + p);
-      }
 
-      if (tab) {
-        d.removeChild(tab);
-        delete tab;
-      }
+    for (p = old_total_pages - 1; p >= total_pages; p--) {
+
+      removeElement(p)
     }
   }
   old_total_pages = total_pages;
 }
 
+function removeElement (p) {
+  var d = document.getElementById("tabdiv");
+  var num = [25, 50, 100]
+
+  //删除原数据
+  for (let j = 0; j < num.length; j++) {
+    const element = num[j];
+
+    tab = document.getElementById("mytab_" + element + "_" + p);
+    if (tab) {
+      d.removeChild(tab);
+      delete tab;
+    }
+  }
+}
+
 function create_table (p) {
   var tab;
 
-  if (CELLS_PER_PAGE == 50) {
+  if (CELLS_PER_PAGE == 25) {
     tab = document.createElement("table");
     tab.innerHTML = '<table class="table"></table>';
-    tab.setAttribute("id", "mytab" + p);
+    tab.setAttribute("id", "mytab_25_" + p);
+    row = 11
+  } else if (CELLS_PER_PAGE == 50) {
+    tab = document.createElement("table");
+    tab.innerHTML = '<table class="table"></table>';
+    tab.setAttribute("id", "mytab_50_" + p);
     row = 11
   } else if (CELLS_PER_PAGE == 100) {
     tab = document.createElement("table");

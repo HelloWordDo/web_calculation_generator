@@ -91,6 +91,11 @@ body,
       align: "left";
       font-size: 24px;
       font-family: "宋体", arial;
+      
+    }
+
+    tbody{
+      vertical-align: top;
     }
 
     @media print {

@@ -165,6 +165,14 @@
           issue = remainder_max_88(issue);
           break;
 
+        case 'threeFigures_div_oneFingures':
+          issue = threeFigures_div_oneFingures(issue);
+          break;
+
+        case 'threeFigures_div_oneFingures_remainder':
+          issue = threeFigures_div_oneFingures_remainder(issue);
+          break;
+
         default:
           alert("unknown type=" + type);
       }
@@ -190,6 +198,7 @@
       changetab();
       create_options();
       generate(50);
+      document.getElementById("btn25").style.display = "inline";
       document.getElementById("btn50").style.display = "inline";
       document.getElementById("btn100").style.display = "inline";
       document.getElementById("btnmix").style.display = "none";
@@ -236,9 +245,10 @@
   </div>
   <div id="act" align="center">
     <div class="act" align="center">
-      <input id="btn50" type="button" value="重新生成50题" onclick="generate(50)" />
-      <input id="btn100" type="button" value="重新生成100题" onclick="generate(100)" />
-      <input id="btnmix" type="button" value="重新生成" onclick="generate(100)" />
+      <input id="btn25" type="button" value="生成25题" onclick="generate(25)" />
+      <input id="btn50" type="button" value="生成50题" onclick="generate(50)" />
+      <input id="btn100" type="button" value="生成100题" onclick="generate(100)" />
+      <input id="btnmix" type="button" value="生成25/50/100题" onclick="generate()" />
       <input type="text" value="1" id="pages" size="2" />份
       <input type="button" value="打印习题" onclick="printme()" />
       <input type="button" value="另存为word" onclick="saveasword()" />
