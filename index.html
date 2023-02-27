@@ -12,13 +12,9 @@
   <script type="text/javascript" src="js/base/jQuery.print.js"></script>
   <script type="text/javascript" src="js/base/jquery.base64.js"></script>
   <script type="text/javascript" src="js/libs/FileSaver/FileSaver.min.js"></script>
-  <!--
-<script type="text/javascript" src="js/libs/jsPDF/jspdf.min.js"></script>
-<script type="text/javascript" src="js/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
-<script type="text/javascript" src="js/pdfmake/pdfmake.js"></script>
-<script type="text/javascript" src="js/pdfmake/vfs_fonts.js"></script>
--->
-  <script type="text/javascript" src="js/base/tableExport.js"></script>
+
+
+  <script type="text/javascript" src="js/libs/wordexport/wordexport.js"></script>
 
   <script type="text/javascript" src="js/generate/layout.js"></script>
   <script type="text/javascript" src="js/generate/exercise.js"></script>
@@ -199,9 +195,17 @@
       create_options();
       generate(50);
       document.getElementById("btn25").style.display = "inline";
+
       document.getElementById("btn50").style.display = "inline";
       document.getElementById("btn100").style.display = "inline";
       document.getElementById("btnmix").style.display = "none";
+    }
+
+    function getZero (num) { // 个位数前补0
+      if (parseInt(num) < 10) {
+        num = '0' + num;
+      }
+      return num;
     }
 
     function printme () {
@@ -209,7 +213,14 @@
     }
 
     function saveasword () {
-      $("table").tableExport({ type: 'doc', escape: 'false', excelstyles: ['height', 'width', 'text-align', 'font-size', 'align'] });
+      var date = new Date();
+      year = date.getFullYear();
+      month = date.getMonth() + 1;
+      day = date.getDate();
+      console.log(year, month, day)
+      var time = year + '' + getZero(month) + '' + getZero(day)
+
+      $(".print_section").wordExport('口算' + CELLS_PER_PAGE + '题' + time);
     }
 
     function saveaspdf () {

@@ -85,13 +85,28 @@ body,
     }
 
     td {
-      height: 80px;
+      line-height: 80px;
       width: 150px;
       text-align: "left";
       align: "left";
       font-size: 24px;
       font-family: "宋体", arial;
-      
+    }
+
+    p25 {
+      line-height: 180px;
+      display: block;
+    }
+
+    p50 {
+      line-height: 94px;
+      display: block;
+     
+    }
+
+    p100 {
+      line-height: 44px;
+      display: block;
     }
 
     tbody{

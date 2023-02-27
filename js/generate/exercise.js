@@ -143,7 +143,6 @@ function show_issues (count) {
         for (c = 0; c < 5; c++) {
           td = tr.cells[c];
           td.innerHTML = print_issue(cells[p * CELLS_PER_PAGE + c * 5 + r], show_answer);
-          td.style.height = "180px";
         }
       }
 
@@ -160,7 +159,6 @@ function show_issues (count) {
         for (c = 0; c < 5; c++) {
           td = tr.cells[c];
           td.innerHTML = print_issue(cells[p * CELLS_PER_PAGE + c * 10 + r], show_answer);
-          td.style.height = "94px";
         }
       }
 
@@ -177,7 +175,6 @@ function show_issues (count) {
         for (c = 0; c < 5; c++) {
           td = tr.cells[c];
           td.innerHTML = print_issue(cells[p * CELLS_PER_PAGE + c * 20 + r], show_answer);
-          td.style.height = "44px";
         }
       }
     }
@@ -216,7 +213,7 @@ function create_table (p) {
     tab = document.createElement("table");
     tab.innerHTML = '<table class="table"></table>';
     tab.setAttribute("id", "mytab_25_" + p);
-    row = 11
+    row = 6
   } else if (CELLS_PER_PAGE == 50) {
     tab = document.createElement("table");
     tab.innerHTML = '<table class="table"></table>';
@@ -250,7 +247,15 @@ function create_table (p) {
 }
 
 function print_issue (issue, show_answer) {
-  var s = '<td> ';
+  var s = '<td class="td50" id="td50"> ';
+  if (CELLS_PER_PAGE === 25) {
+    s += '<p25>'
+  } else if (CELLS_PER_PAGE === 50) {
+    s += '<p50>'
+  } else {
+    s += '<p100>'
+  }
+
   s += issue.opr[0];
   s += issue.op[0];
   s += issue.opr[1];
@@ -261,6 +266,14 @@ function print_issue (issue, show_answer) {
   s += '=';
   if (show_answer)
     s += issue.result;
+
+  if (CELLS_PER_PAGE === 25) {
+    s += '</p25>'
+  } else if (CELLS_PER_PAGE === 50) {
+    s += '</p50>'
+  } else {
+    s += '</p100>'
+  }
   s += '</td>'
   return s;
 }
