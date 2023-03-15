@@ -153,3 +153,45 @@ function addn_2_2(issue) {
 
   return issue;
 }
+
+// 三位数加一位数
+function add_3_1(issue) {
+
+  j = rand(2, 9);
+  i = rand(100, 999 - j);
+
+  issue.opr[0] = i;
+  issue.op[0] = '+';
+  issue.opr[1] = j;
+  issue.result = issue.opr[0] + issue.opr[1];
+
+  return issue;
+}
+
+// 三位数加两位数
+function add_3_2(issue) {
+
+  j = rand(10, 99);
+  i = rand(100, 999 - j);
+
+  issue.opr[0] = i;
+  issue.op[0] = '+';
+  issue.opr[1] = j;
+  issue.result = issue.opr[0] + issue.opr[1];
+
+  return issue;
+}
+
+// 三位数加三位数
+function add_3_3(issue) {
+
+  i = rand(100, 899);
+  j = rand(100, 999 - i);
+
+  issue.opr[0] = i;
+  issue.op[0] = '+';
+  issue.opr[1] = j;
+  issue.result = issue.opr[0] + issue.opr[1];
+
+  return issue;
+}

@@ -27,7 +27,6 @@
   <script type="text/javascript" src="js/calculate/integerMix.js"></script>
 
   <script type="text/javascript">
-
     var modes = calculateModes;
 
     /* randomly generate one issue of give type */
@@ -161,6 +160,27 @@
           issue = remainder_max_88(issue);
           break;
 
+        case 'add_3_1':
+          issue = add_3_1(issue);
+          break;
+
+        case 'add_3_2':
+          issue = add_3_2(issue);
+          break;
+
+        case 'add_3_3':
+          issue = add_3_3(issue);
+          break;
+        case 'sub_3_1':
+          issue = sub_3_1(issue);
+          break;
+        case 'sub_3_2':
+          issue = sub_3_2(issue);
+          break;
+        case 'sub_3_3':
+          issue = sub_3_3(issue);
+          break;
+
         case 'threeFigures_div_oneFingures':
           issue = threeFigures_div_oneFingures(issue);
           break;
@@ -224,9 +244,14 @@
     }
 
     function saveaspdf () {
-      $("table").tableExport({ type: 'pdf', fileName: 'issues', pdfmake: { enabled: true } });
+      $("table").tableExport({
+        type: 'pdf',
+        fileName: 'issues',
+        pdfmake: {
+          enabled: true
+        }
+      });
     }
-
   </script>
 
   <center>
