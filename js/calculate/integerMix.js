@@ -148,3 +148,175 @@ function mix_2_1(issue) {
 
   return issue;
 }
+
+//除法混合
+function div_mix(issue) {
+  issue.op_n = 2;
+  type = rand(0, 4);
+  switch (type) {
+    case 0:
+      r = rand(0, 1);
+      if (r == 0) {
+        // A÷B×C
+        issue.op[0] = '÷';
+        issue.op[1] = '×';
+
+        do {
+          c = rand(11, 99);
+          i = rand(11, 99);
+          b = rand(2, 9)
+
+        } while (c * i > 999)
+
+        issue.opr[0] = i * b;
+        issue.opr[1] = b;
+        issue.opr[2] = c;
+
+      } else {
+        // A×(B÷C)
+        issue.op[0] = '×';
+        issue.op[1] = '÷';
+
+        do {
+          c = rand(11, 99);
+          i = rand(11, 99);
+          b = rand(2, 9)
+
+        } while (c * i > 999)
+        issue.opr[0] = c;
+        issue.opr[1] = '(' + i * b;
+        issue.opr[2] = b + ')';
+      }
+      issue.result = c * i;
+      break;
+
+    case 1:
+
+      // A×B÷C
+      issue.op[0] = '×';
+      issue.op[1] = '÷';
+      do {
+        a = rand(11, 99);
+        b = rand(11, 99);
+        c = rand(2, 9)
+
+      } while (a * b / c > 999)
+
+      issue.opr[0] = a;
+      issue.opr[1] = b;
+      issue.opr[2] = c;
+      issue.result = parseInt(a * b / c);
+      break;
+
+    case 2:
+      // A÷(B×C)
+      do {
+        issue.op[0] = '÷';
+        issue.op[1] = '×';
+
+        a = rand(2, 9);
+        b = rand(2, 9);
+
+        i = rand(11, 99)
+        issue.opr[0] = i * (a * b);
+        issue.opr[1] = '(' + a;
+        issue.opr[2] = b + ')';
+        issue.result = i;
+      } while (issue.opr[0] > 999)
+      break;
+
+    case 3:
+
+      //A-B÷C
+      i = rand(100, 999);
+      c = rand(2, 9);
+
+      issue.op[0] = '-';
+      issue.op[1] = '÷';
+      var temp = parseInt(i / c);
+      issue.opr[1] = temp * c;
+      issue.opr[2] = c;
+
+      a = rand(temp + 1, 999);
+      issue.opr[0] = a;
+      issue.result = a - temp;
+
+      break;
+
+    case 4:
+      //A+B÷C
+      i = rand(100, 999);
+      c = rand(2, 9);
+
+      issue.op[0] = '+';
+      issue.op[1] = '÷';
+      var temp = parseInt(i / c);
+      issue.opr[1] = temp * c;
+      issue.opr[2] = c;
+
+      do {
+        a = rand(10, 999);
+      } while (a + temp > 999)
+
+      issue.opr[0] = a;
+      issue.result = a + temp;
+
+      break;
+    default:
+      return;
+  }
+  return issue;
+}
+
+
+//除法混合
+function mul_mix(issue) {
+
+  issue.op_n = 2;
+  type = rand(1, 1);
+  switch (type) {
+    case 0:
+
+      //A-B*C
+      do {
+        b = rand(10, 99);
+        c = rand(10, 99);
+      } while (b * c > 999)
+
+      a = rand(b * c, 999);
+
+      issue.op[0] = '-';
+      issue.op[1] = '×';
+
+      issue.opr[0] = a;
+      issue.opr[1] = b;
+      issue.opr[2] = c;
+      issue.result = a - b * c
+
+      break;
+
+    case 1:
+
+      //A+B*C
+      do {
+        b = rand(10, 99);
+        c = rand(10, 99);
+      } while (b * c > 999)
+
+      a = rand(b * c + 1, 999);
+
+      console.log(a, b, c)
+      issue.op[0] = '+';
+      issue.op[1] = '×';
+
+      issue.opr[0] = a - b * c;
+      issue.opr[1] = b;
+      issue.opr[2] = c;
+      issue.result = issue.opr[0] + b * c
+
+      break;
+    default:
+      break
+  }
+  return issue;
+}

@@ -31,5 +31,8 @@ var calculateModes = [
   ["sub_3_2", "3位数-2位数"],
   ["sub_3_3", "3位数-3位数"],
   ["threeFigures_div_oneFingures", "3位÷1位"],
-  ["threeFigures_div_oneFingures_remainder", "3位÷1位带余"]
+  ["threeFigures_div_oneFingures_remainder", "3位÷1位带余"],
+  ["mul_2_2", "2位×2位"],
+  ["mul_mix", "×法混合"],
+  ["div_mix", "÷法混合"]
 ]
