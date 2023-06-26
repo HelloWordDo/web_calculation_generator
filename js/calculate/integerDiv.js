@@ -1,5 +1,5 @@
 //9*9内除法
-function div_9_9 (issue) {
+function div_9_9(issue) {
   i = rand(1, 9);
   j = rand(1, 9);
 
@@ -12,7 +12,7 @@ function div_9_9 (issue) {
 }
 
 //88以内带余数除法
-function remainder_max_88 (issue) {
+function remainder_max_88(issue) {
   i = rand(2, 9);
   j = rand(2, 9);
   m = rand(1, Math.min(i, j) - 1);
@@ -27,7 +27,7 @@ function remainder_max_88 (issue) {
 }
 
 //三位数整除一位数
-function threeFigures_div_oneFingures (issue) {
+function div_3_1(issue) {
 
   i = rand(100, 999);
   j = rand(2, 9);
@@ -42,7 +42,7 @@ function threeFigures_div_oneFingures (issue) {
 }
 
 //三位数不整除一位数
-function threeFigures_div_oneFingures_remainder (issue) {
+function div_3_1_rem(issue) {
 
   i = rand(100, 999);
   j = rand(2, 9);
@@ -54,6 +54,19 @@ function threeFigures_div_oneFingures_remainder (issue) {
   issue.op[0] = '÷';
   issue.opr[1] = j;
   issue.result = temp + '······' + m;
+
+  return issue
+}
+
+//除以一位数得两位数
+function div_1_res_2(issue) {
+
+  i = rand(11, 99);
+  j = rand(2, 9);
+  issue.opr[0] = i * j;
+  issue.op[0] = '÷';
+  issue.opr[1] = j;
+  issue.result = i;
 
   return issue
 }
