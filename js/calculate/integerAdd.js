@@ -69,6 +69,68 @@ function add_2_1(issue) {
   return issue;
 }
 
+//1位+2位或2位+1位 不进位
+function add_1_2_uncarry(issue) {
+    
+  var i, j, tempResult;
+  i = rand(1, 9); // 生成一个介于1到9之间的随机数（包括1和9）
+  j = rand(1, 9); // 生成一个介于1到9之间的随机数（包括1和9）
+  
+  if (rand(0, 1) === 0) { // 随机选择1位数加2位数或2位数加1位数
+    // 1位数加2位数
+    do {
+      issue.opr[0] = i; // 将i赋值给issue的opr数组的第一个元素
+      issue.op[0] = '+'; // 将'+'赋值给issue的op数组的第一个元素
+      issue.opr[1] = j * 10 + rand(0, 9 - i); // 生成一个两位数，使得没有进位
+      tempResult = issue.opr[0] + issue.opr[1];
+    } while (tempResult >= 100);
+  } else {
+    // 两位数加1位数
+    do {
+      issue.opr[0] = j * 10 + rand(0, 9); // 生成一个两位数
+      issue.op[0] = '+'; // 将'+'赋值给issue的op数组的第一个元素
+      issue.opr[1] = i; // 将i赋值给issue的opr数组的第二个元素
+      tempResult = issue.opr[0] + issue.opr[1];
+    } while (tempResult >= 100 || issue.opr[0] % 10 + i >= 10); // 确保结果不需要进位
+  }
+  
+  issue.result = tempResult; // 计算结果并赋值给issue的result属性
+  
+  return issue; // 返回修改后的issue对象
+}
+
+//1位+2位或2位+1位 进位
+function add_1_2_carry(issue) {
+  
+  var i, j, tempResult;
+  
+  if (rand(0, 1) === 0) { // 随机选择1位数加2位数或2位数加1位数
+    // 1位数加2位数
+    do {
+      i = rand(1, 9); // 生成一个介于1到9之间的随机数（包括1和9）
+      j = rand(1, 9); // 生成一个介于1到9之间的随机数（包括1和9）
+      issue.opr[0] = i; // 将i赋值给issue的opr数组的第一个元素
+      issue.op[0] = '+'; // 将'+'赋值给issue的op数组的第一个元素
+      issue.opr[1] = j * 10 + rand(10 - i, 9); // 生成一个两位数，使得有进位
+      tempResult = issue.opr[0] + issue.opr[1];
+    } while (tempResult >= 100);
+  } else {
+    // 两位数加1位数
+    do {
+      i = rand(1, 9); // 生成一个介于1到9之间的随机数（包括1和9）
+      j = rand(1, 8); // 生成一个介于1到8之间的随机数（包括1和8）
+      issue.opr[0] = j * 10 + rand(0, 9); // 生成一个两位数
+      issue.op[0] = '+'; // 将'+'赋值给issue的op数组的第一个元素
+      issue.opr[1] = i; // 将i赋值给issue的opr数组的第二个元素
+      tempResult = issue.opr[0] + issue.opr[1];
+    } while (tempResult >= 100 || (issue.opr[0] % 10 + i < 10)); // 确保结果需要进位
+  }
+  
+  issue.result = tempResult; // 计算结果并赋值给issue的result属性
+  
+  return issue; // 返回修改后的issue对象
+}
+
 //两位数加法=100
 function addc_2_2_100(issue) {
 

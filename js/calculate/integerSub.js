@@ -57,6 +57,34 @@ function sub_2_1(issue) {
   return issue;
 }
 
+//两位数减一位数不退位
+function sub_2_1_unabdicate(issue) {
+
+  var i, j;
+  i = rand(1, 9);
+  j = rand(1, 9);
+  issue.opr[0] = i * 10 + j;
+  issue.op[0] = '－';
+  issue.opr[1] = rand(1, j);
+  issue.result = issue.opr[0] - issue.opr[1];
+
+  return issue;
+}
+
+//两位数减一位数退位
+function sub_2_1_abdicate(issue) {
+
+  var i, j;
+  i = rand(1, 9);
+  j = rand(0, 8);
+  issue.opr[0] = i * 10 + j;
+  issue.op[0] = '－';
+  issue.opr[1] = rand(j + 1, 9);
+  issue.result = issue.opr[0] - issue.opr[1];
+
+  return issue;
+}
+
 //100减一位数
 function sub_100_1(issue) {
 

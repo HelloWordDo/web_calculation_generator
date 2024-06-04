@@ -79,10 +79,25 @@
           issue = add_2_1(issue);
           break;
 
+        //1位+2位不进位
+        case 'add_1_2_uncarry':
+          issue = add_1_2_uncarry(issue);
+          break;
+
+        //1位+2位进位
+        case 'add_1_2_carry':
+          issue = add_1_2_carry(issue);
+          break;
+
         case 'sub_2_1':
           issue = sub_2_1(issue);
           break;
-
+        case 'sub_2_1_unabdicate':
+          issue = sub_2_1_unabdicate(issue);
+          break;
+        case 'sub_2_1_abdicate':
+          issue = sub_2_1_abdicate(issue);
+          break;
         case 'addc_2_2_100':
           issue = addc_2_2_100(issue);
           break;
